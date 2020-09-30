@@ -1,18 +1,33 @@
-let title = document.querySelector("h1").innerText;
+const src = chrome.extension.getURL('axios-instance.js');
+const axios =  import(src);
+
+let title = document.querySelector("h1").innerHTML;
 let http = document.URL;
  
-const data = {
+let data = {
     title: title,
     http: http
 }
 
-chrome.storage.sync.set({'data': data}, function() {
- 
-})
-
-chrome.storage.sync.get('data', function(){
- 
-})
 
 
+localStorage.setItem("data", JSON.stringify(data));
 
+postDataHandler = () => {
+
+    const cake ={
+        title: data.title,
+        http: data.http
+    }
+
+    
+
+    
+    axios.post('recipes/cakes/cake.json',cake).
+    then(response =>alert(response)).
+    catch(error => alert(error))
+  
+
+
+    
+}
