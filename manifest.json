@@ -6,12 +6,20 @@
       "declarativeContent", 
       "storage",
       "activeTab", 
-      "<all_urls>"],
+      "<all_urls>",
+    "https://www.gstatic.com/firebasejs/7.21.1/firebase.js"],
       
       "background": {
-        "scripts": ["background.js"],
+        "page": "background.html",
         "persistent": false
       },
+      "content_scripts": [
+        {
+          "matches": ["<all_urls>"],
+          "js": ["app.js"],
+          "run_at": "document_end"
+        }
+      ],
       
     "browser_action": {
       "default_popup": "popup.html",
@@ -25,5 +33,6 @@
   },
 
  
-    "manifest_version": 2
+    "manifest_version": 2,
+    "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'"
   }

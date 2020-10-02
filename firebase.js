@@ -1,15 +1,11 @@
-let title = document.querySelector("h1").innerHTML;
-let http = document.URL;
- 
-// let data = {
-//     title: title,
-//     http: http
-// }
+const url="https://cookbook-addec.firebaseio.com/";
+
 
 var config = {
     apiKey: "AIzaSyBLwWhI5DKt9vFOfoNhA_Jfn1eBedbWRZI",
     authDomain: "cookbook-addec.firebaseapp.com",
     databaseURL: "https://cookbook-addec.firebaseio.com",
+    storageBucket: "cookbook-addec.appspot.com",
     
   };
 
@@ -23,10 +19,3 @@ function writeUserData(title, http) {
      http: 'www.babeczki.pl'
     });
   }
-
-// localStorage.setItem("data", JSON.stringify(data))
-
-
-
-// const data = JSON.parse(localStorage.getItem("data"));
-// console.log(data);
