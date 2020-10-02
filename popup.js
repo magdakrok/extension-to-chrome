@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
        
         chrome.tabs.executeScript(
-         {file: 'context.js'}, ()=>console.log("go to context file"))
+         {file: 'firebase.js'}, ()=>console.log("go to context file"))
 
             
             

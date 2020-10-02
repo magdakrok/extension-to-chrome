@@ -19,7 +19,7 @@ var database = firebase.database();
 
 function writeUserData(title, http) {
     firebase.database().ref('/cake').set({
-     title: 'babeczki',
+     title: 'ciasta',
      http: 'www.babeczki.pl'
     });
   }
