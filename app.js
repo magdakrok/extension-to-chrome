@@ -13,6 +13,6 @@ chrome.runtime.sendMessage({command: "fetch"}, (response) => {
   
   
   
-  var writeUserData = function(data) {
+  var addCake= function(data) {
     console.log('From Extension--', data);
   }

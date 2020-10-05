@@ -14,17 +14,25 @@ var config = {
 var database = firebase.database();
 
 function writeUserData(title, http) {
-    firebase.database().ref('/cake').set({
-     title: 'babeczki',
-     http: 'www.babeczki.pl'
+    let id=randomID();
+    firebase.database().ref('/cake/'+id).set({
+     title: title,
+     http: http
     });
+  }
+
+
+  function randomID(){
+   let array = new Uint32Array(1);
+   let id= window.crypto.getRandomValues(array);
+   return id;
   }
 
   chrome.runtime.onMessage.addListener((msg, sender, resp) => {
 
     if(msg.command == "post"){
-      writeUserData('ciasta', 'www.babeczki.pl')
-      console.log("writeDataa");
+      addCake('makowce', 'www.makowiec.pl')
+      console.log("cake added");
     }
     // if(msg.command == "fetch"){
     //   var docRef = db.collection("cities").doc("LA");
