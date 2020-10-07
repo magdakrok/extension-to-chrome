@@ -7,10 +7,15 @@ var config = {
 
 function addCake(items) {
     let id=randomID();
+    try{
     firebase.database().ref('/cake/'+id).set({
      title: items.title,
      http: items.http
-    });
+    })
+    console.log("add");
+    }catch{
+    console.log("Error");
+}
   }
 
 function randomID(){
@@ -23,7 +28,7 @@ function randomID(){
 chrome.storage.sync.get(['title', 'http'], function(items) {
     console.log('Settings retrieved', items);
     addCake(items);
-    console.log("cake added");
+    
   });
 
  firebase.initializeApp(config);
