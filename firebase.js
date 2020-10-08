@@ -5,14 +5,22 @@ var config = {
     storageBucket: "cookbook-addec.appspot.com",
 };
 
+
+
+firebase.initializeApp(config);
+
+
 function addCake(items) {
     let id=randomID();
+
     try{
     firebase.database().ref('/cake/'+id).set({
      title: items.title,
      http: items.http
     })
     console.log("add");
+    alert("Ciasteczko dodane");
+    
     }catch{
     console.log("Error");
 }
@@ -25,10 +33,15 @@ function randomID(){
 }
 
 
-chrome.storage.sync.get(['title', 'http'], function(items) {
-    console.log('Settings retrieved', items);
-    addCake(items);
-    
-  });
+chrome.runtime.onMessage.addListener((msg, sender, resp) => {
 
- firebase.initializeApp(config);
+    if(msg.command == "save"){
+        chrome.storage.sync.get(['title', 'http'], function(items) {
+            console.log('Settings retrieved', items);
+            addCake(items);
+            
+          });
+    }
+});
+
+

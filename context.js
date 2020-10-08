@@ -7,9 +7,9 @@ chrome.storage.sync.set({'title': title, 'http': http}, function() {
   });
 
 
-// chrome.runtime.sendMessage({command: "save"}, (response) => {
-//     console.log("save");
-//   });
+chrome.runtime.sendMessage({command: "save"}, (response) => {
+    console.log("save");
+  });
 
- 
+
   
