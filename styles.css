@@ -1,0 +1,17 @@
+button {
+    height: 40px;
+    width: 60px;
+    outline: none;
+   margin: 5px;
+   font-family: Georgia, 'Times New Roman', Times, serif;
+   font-style: italic;
+   font-weight: bold;
+   border-radius: 40%;
+  }
+  
+#cake{
+  background-color: chocolate;
+}
+#other{
+background-color:burlywood;
+}
