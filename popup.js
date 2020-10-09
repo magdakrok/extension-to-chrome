@@ -1,15 +1,39 @@
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector("button").addEventListener('click',
-    onclick, false)
     
  
-   
-    function onclick(){
+    let cake = document.getElementById("cake").addEventListener('click', onclickCake, false);
+    let other = document.getElementById("other").addEventListener('click', onclickOther, false);
  
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-       
-        chrome.tabs.executeScript({
-             file: 'context.js'}, ()=>console.log("go to context file"))
-        }); 
+
+    function onclickCake(){
+        chrome.runtime.sendMessage({command: "cake", data: cake}, (response) => {
+        });
+       goToScript();
     }
+ 
+    function onclickOther(){
+        chrome.runtime.sendMessage({command: "other", data: cake}, (response) => {
+    });
+
+    goToScript();
+    }
+
+
+    function goToScript(){
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+           
+            chrome.tabs.executeScript({
+             file: 'context.js'}, ()=>console.log("go to context file"))
+             }); 
+    }
+
+   
 }, false)
+
+
+
+
+
+
+
+
