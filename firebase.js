@@ -59,21 +59,26 @@ function randomID(){
 }
 
 
-chrome.runtime.onMessage.addListener((msg, sender, resp) => {
 
-    if(msg.command == "cake"){
-        chrome.storage.sync.get(['title', 'http'], function(items) {
-            console.log('Settings retrieved', items);
-            addCake(items);
-            
-          });
-    }else if(msg.command == "other"){
-        chrome.storage.sync.get(['title', 'http'], function(items) {
-            console.log('Settings retrieved', items);
-            addOther(items);
-            
-          });
-        }
+    chrome.runtime.onMessage.addListener( (msg) =>{
+
+       
+            if(msg.command == "cake"){
+                chrome.storage.sync.get(['title', 'http'], function(items) {
+                    console.log('Settings retrieved', items);
+                   addCake(items);
+                    chrome.storage.sync.remove(['title', 'http']);
+                    
+                  });
+            }else if(msg.command == "other"){
+                chrome.storage.sync.get(['title', 'http'], function(items) {
+                    console.log('Settings retrieved', items);
+                    addOther(items);
+                    chrome.storage.sync.remove(['title', 'http']);
+                  });
+                }
+        
+       
 });
 
 

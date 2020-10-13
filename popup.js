@@ -6,16 +6,18 @@ document.addEventListener('DOMContentLoaded', function () {
  
 
     function onclickCake(){
+        goToScript();
         chrome.runtime.sendMessage({command: "cake", data: cake}, (response) => {
         });
-       goToScript();
+       
     }
  
     function onclickOther(){
+        goToScript();
         chrome.runtime.sendMessage({command: "other", data: cake}, (response) => {
     });
 
-    goToScript();
+    
     }
 
 
@@ -29,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
    
 }, false)
+
 
 
 
