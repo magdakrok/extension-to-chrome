@@ -14,17 +14,22 @@ firebase.initializeApp(config);
 function addCake(items) {
     let id=randomID();
 
-    try{
-    firebase.database().ref('/cake/'+id).set({
+    
+  const database =  firebase.database().ref('/cake/'+id).set({
      title: items.title,
      http: items.http
-    })
-    console.log("add");
-    alert("Przepis dodany!");
+    });
+
+    database.then(
+        respone => alert("Przepis dodany!"));
+    //.catch((err) => console.log("error"));
     
-    }catch{
-    new Error(alert(error));
-}
+
+
+    
+
+    setTimeout(
+        () => chrome.storage.local.remove(["title", "http"], onRemoved), 500);
   }
 
   function addOther(items) {
@@ -70,8 +75,9 @@ function onRemoved() {
                 
                 chrome.storage.sync.get(['title', 'http'], function(items) {
                     console.log('Settings retrieved', items);
-                   addCake(items);
-                   chrome.storage.local.remove(["title", "http"], onRemoved);
+                   
+                   setTimeout(() => addCake(items), 500);
+                 
                     
                   });
             }else if(msg.command == "other"){
