@@ -5,17 +5,10 @@ var config = {
     storageBucket: "cookbook-addec.appspot.com",
 };
 
-chrome.runtime.onMessage.addListener((msg, sender, resp) => {
-
-    if(msg.command == "cake"){
-       alert("cake");
-    }else if(msg.command == "other"){
-      alert("other");
-    }
-  });
-
 
 firebase.initializeApp(config);
+
+
 
 
 function addCake(items) {
@@ -27,10 +20,10 @@ function addCake(items) {
      http: items.http
     })
     console.log("add");
-    alert("Ciasteczko dodane");
+    alert("Przepis dodany!");
     
     }catch{
-    console.log("Error");
+    new Error(alert(error));
 }
   }
 
@@ -43,7 +36,7 @@ function addCake(items) {
      http: items.http
     })
     console.log("add");
-    alert("Dania dodane");
+    alert("Przepis dodany!");
     
     }catch{
     console.log("Error");
@@ -58,27 +51,39 @@ function randomID(){
     return id;
 }
 
+// callback to remove() just checks for errors
+function onRemoved() {
+    if (chrome.runtime.lastError) {
+      console.log(chrome.runtime.lastError);
+    } else {
+      console.log("remove");
+    }
+  }
+  
+  
 
 
-    chrome.runtime.onMessage.addListener( (msg) =>{
+    chrome.runtime.onMessage.addListener(function (msg){
 
        
             if(msg.command == "cake"){
+                
                 chrome.storage.sync.get(['title', 'http'], function(items) {
                     console.log('Settings retrieved', items);
                    addCake(items);
-                    chrome.storage.sync.remove(['title', 'http']);
+                   chrome.storage.local.remove(["title", "http"], onRemoved);
                     
                   });
             }else if(msg.command == "other"){
+               
                 chrome.storage.sync.get(['title', 'http'], function(items) {
                     console.log('Settings retrieved', items);
                     addOther(items);
-                    chrome.storage.sync.remove(['title', 'http']);
+                    chrome.storage.local.remove(["title", "http"], onRemoved);
                   });
                 }
         
-       
+       return true;
 });
 
 
