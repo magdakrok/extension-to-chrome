@@ -1,7 +1,7 @@
 var config = {
     apiKey: "AIzaSyBLwWhI5DKt9vFOfoNhA_Jfn1eBedbWRZI",
     authDomain: "cookbook-addec.firebaseapp.com",
-    databaseURL: "https://cookbook-addec.firebaseio.com",
+    databaseURL: "https://cookbook-addec.firebaseio",
     storageBucket: "cookbook-addec.appspot.com",
 };
 
@@ -11,41 +11,49 @@ firebase.initializeApp(config);
 
 
 
+
 function addCake(items) {
     let id=randomID();
 
     
-  const database =  firebase.database().ref('/cake/'+id).set({
+   firebase.database().ref('/cake/'+id).set({
      title: items.title,
      http: items.http
+    },
+    function(error) {
+        if (error) {
+          // The write failed...
+        
+        } else {
+          // Data saved successfully!
+          alert('Przepis zapisany')
+        }
     });
-
-    database.then(
-        respone => alert("Przepis dodany!"));
-    //.catch((err) => console.log("error"));
-    
-
-
-    
 
     setTimeout(
         () => chrome.storage.local.remove(["title", "http"], onRemoved), 500);
   }
 
+
   function addOther(items) {
     let id=randomID();
 
-    try{
+
     firebase.database().ref('/other/'+id).set({
      title: items.title,
      http: items.http
-    })
-    console.log("add");
-    alert("Przepis dodany!");
-    
-    }catch{
-    console.log("Error");
-}
+    },
+    function(error) {
+        if (error) {
+          // The write failed...
+          alert("errr")
+        } else {
+          // Data saved successfully!
+          alert('Przepis zapisany')
+        }
+    });
+    setTimeout(
+        () => chrome.storage.local.remove(["title", "http"], onRemoved), 500);
   }
 
 
