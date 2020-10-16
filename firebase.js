@@ -1,7 +1,7 @@
 var config = {
     apiKey: "AIzaSyBLwWhI5DKt9vFOfoNhA_Jfn1eBedbWRZI",
     authDomain: "cookbook-addec.firebaseapp.com",
-    databaseURL: "https://cookbook-addec.firebaseio",
+    databaseURL: "https://cookbook-addec.firebaseio.com",
     storageBucket: "cookbook-addec.appspot.com",
 };
 
@@ -9,55 +9,37 @@ var config = {
 firebase.initializeApp(config);
 
 
-
-
-
 function addCake(items) {
     let id=randomID();
 
-    
-   firebase.database().ref('/cake/'+id).set({
-     title: items.title,
-     http: items.http
-    },
-    function(error) {
-        if (error) {
-          // The write failed...
-        
-        } else {
-          // Data saved successfully!
-          alert('Przepis zapisany')
-        }
-    });
-
-    setTimeout(
-        () => chrome.storage.local.remove(["title", "http"], onRemoved), 500);
+    return new Promise ((resolve, reject) => {
+        firebase.database().ref('/cake/'+id).set({
+            title: items.title,
+            http: items.http
+          }).then(res => resolve(res))
+          .catch(error => {
+              console.log(error);
+              reject(error)
+          })
+    })
   }
-
 
   function addOther(items) {
     let id=randomID();
 
+    return new Promise ((resolve, reject) => {
+        firebase.database().ref('/other/'+id).set({
+            title: items.title,
+            http: items.http
+          }).then(res => resolve(res))
+          .catch(error => {
+              console.log(error);
+              reject(error)
+          })
+    })
+}
 
-    firebase.database().ref('/other/'+id).set({
-     title: items.title,
-     http: items.http
-    },
-    function(error) {
-        if (error) {
-          // The write failed...
-          alert("errr")
-        } else {
-          // Data saved successfully!
-          alert('Przepis zapisany')
-        }
-    });
-    setTimeout(
-        () => chrome.storage.local.remove(["title", "http"], onRemoved), 500);
-  }
-
-
-
+ 
 function randomID(){
     let array = new Uint32Array(1);
     let id= window.crypto.getRandomValues(array);
@@ -71,12 +53,10 @@ function onRemoved() {
     } else {
       console.log("remove");
     }
-  }
+}
   
   
-
-
-    chrome.runtime.onMessage.addListener(function (msg){
+chrome.runtime.onMessage.addListener(function (msg){
 
        
             if(msg.command == "cake"){
@@ -84,17 +64,22 @@ function onRemoved() {
                 chrome.storage.sync.get(['title', 'http'], function(items) {
                     console.log('Settings retrieved', items);
                    
-                   setTimeout(() => addCake(items), 500);
-                 
-                    
-                  });
+                  addCake(items)
+                  .then(process => console.log("Przepis dodano!"))
+                  .catch(err => {alert("Error!"), console.log(err)});
+                });
+                setTimeout(
+                    () => chrome.storage.local.remove(["title", "http"], onRemoved), 500);
             }else if(msg.command == "other"){
                
                 chrome.storage.sync.get(['title', 'http'], function(items) {
                     console.log('Settings retrieved', items);
-                    addOther(items);
-                    chrome.storage.local.remove(["title", "http"], onRemoved);
-                  });
+                    addOther(items)
+                  .then(process => console.log("Przepis dodano!"))
+                  .catch(err => {alert("Error!"), console.log(err)});
+                });
+                setTimeout(
+                    () => chrome.storage.local.remove(["title", "http"], onRemoved), 500);
                 }
         
        return true;
