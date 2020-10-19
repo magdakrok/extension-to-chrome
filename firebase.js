@@ -15,7 +15,9 @@ function addCake(items) {
     return new Promise ((resolve, reject) => {
         firebase.database().ref('/cake/'+id).set({
             title: items.title,
-            http: items.http
+            http: items.http,
+            photo: items.photo
+
           }).then(res => resolve(res))
           .catch(error => {
               console.log(error);
@@ -30,12 +32,13 @@ function addCake(items) {
     return new Promise ((resolve, reject) => {
         firebase.database().ref('/other/'+id).set({
             title: items.title,
-            http: items.http
+            http: items.http,
+            photo: items.photo
           }).then(res => resolve(res))
           .catch(error => {
               console.log(error);
               reject(error);
-              
+
           })
     })
 }
@@ -62,7 +65,7 @@ chrome.runtime.onMessage.addListener(function (msg){
        
             if(msg.command == "cake"){
                 
-                chrome.storage.sync.get(['title', 'http'], function(items) {
+                chrome.storage.sync.get(['title', 'http', 'photo'], function(items) {
                     console.log('Settings retrieved', items);
                    
                   addCake(items)
@@ -70,19 +73,19 @@ chrome.runtime.onMessage.addListener(function (msg){
                   .catch(err => {alert("Error!"), console.log(err)});
                 });
                 setTimeout(
-                    () => chrome.storage.local.remove(["title", "http"], onRemoved), 500);
+                    () => chrome.storage.local.remove(["title", "http", "photo"], onRemoved), 500);
 
 
             }else if(msg.command == "other"){
                
-                chrome.storage.sync.get(['title', 'http'], function(items) {
+                chrome.storage.sync.get(['title', 'http', 'photo'], function(items) {
                     console.log('Settings retrieved', items);
                     addOther(items)
                   .then(process => alert("Przepis dodano!"))
                   .catch(err => {alert("Error!"), console.log(err)});
                 });
                 setTimeout(
-                    () => chrome.storage.local.remove(["title", "http"], onRemoved), 500);
+                    () => chrome.storage.local.remove(["title", "http", "photo"], onRemoved), 500);
                 }
         
        return true;
