@@ -16,9 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         goToScript();
         chrome.runtime.sendMessage({command: "other", data: cake}, (response) => {
     });
-
-    
-    }
+}
 
 
     function goToScript(){

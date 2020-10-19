@@ -34,7 +34,8 @@ function addCake(items) {
           }).then(res => resolve(res))
           .catch(error => {
               console.log(error);
-              reject(error)
+              reject(error);
+              
           })
     })
 }
@@ -65,17 +66,19 @@ chrome.runtime.onMessage.addListener(function (msg){
                     console.log('Settings retrieved', items);
                    
                   addCake(items)
-                  .then(process => console.log("Przepis dodano!"))
+                  .then(process => alert("Przepis dodano!"))
                   .catch(err => {alert("Error!"), console.log(err)});
                 });
                 setTimeout(
                     () => chrome.storage.local.remove(["title", "http"], onRemoved), 500);
+
+
             }else if(msg.command == "other"){
                
                 chrome.storage.sync.get(['title', 'http'], function(items) {
                     console.log('Settings retrieved', items);
                     addOther(items)
-                  .then(process => console.log("Przepis dodano!"))
+                  .then(process => alert("Przepis dodano!"))
                   .catch(err => {alert("Error!"), console.log(err)});
                 });
                 setTimeout(
