@@ -73,7 +73,7 @@ chrome.runtime.onMessage.addListener(function (msg){
                   .catch(err => {alert("Error!"), console.log(err)});
                 });
                 setTimeout(
-                    () => chrome.storage.local.remove(["title", "http", "photo"], onRemoved), 500);
+                    () => chrome.storage.sync.remove(["title", "http", "photo"], onRemoved), 5000);
 
 
             }else if(msg.command == "cooking"){
@@ -85,7 +85,7 @@ chrome.runtime.onMessage.addListener(function (msg){
                   .catch(err => {alert("Error!"), console.log(err)});
                 });
                 setTimeout(
-                    () => chrome.storage.local.remove(["title", "http", "photo"], onRemoved), 500);
+                    () => chrome.storage.sync.remove(["title", "http", "photo"], onRemoved), 5000);
                 }
         
        return true;
