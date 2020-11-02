@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
  
     let cake = document.getElementById("cake").addEventListener('click', onclickCake, false);
-    let other = document.getElementById("other").addEventListener('click', onclickOther, false);
+    let cook= document.getElementById("cooking").addEventListener('click', onclickCooking, false);
  
 
     function onclickCake(){
@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', function () {
        
     }
  
-    function onclickOther(){
+    function onclickCooking(){
         goToScript();
-        chrome.runtime.sendMessage({command: "other", data: cake}, (response) => {
+        chrome.runtime.sendMessage({command: "cooking", data: cook}, (response) => {
     });
 }
 

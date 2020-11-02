@@ -30,7 +30,7 @@ function addCake(items) {
     let id=randomID();
 
     return new Promise ((resolve, reject) => {
-        firebase.database().ref('/other/'+id).set({
+        firebase.database().ref('/cooking'+id).set({
             title: items.title,
             http: items.http,
             photo: items.photo
@@ -76,7 +76,7 @@ chrome.runtime.onMessage.addListener(function (msg){
                     () => chrome.storage.local.remove(["title", "http", "photo"], onRemoved), 500);
 
 
-            }else if(msg.command == "other"){
+            }else if(msg.command == "cooking"){
                
                 chrome.storage.sync.get(['title', 'http', 'photo'], function(items) {
                     console.log('Settings retrieved', items);

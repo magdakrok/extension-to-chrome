@@ -12,6 +12,6 @@ This extension was wrote to use with a cookbook app. When you clicked the extens
 2. Add the extension to your chrome browser. 
 
 
-
+Work in progress
 
 
