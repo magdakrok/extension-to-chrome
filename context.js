@@ -9,8 +9,14 @@ queryPhoto.forEach(queryPhoto => {
     console.log(title);
     photo = queryPhoto.currentSrc;
     console.log("photo", photo);
+  }else{
+    photo="no photo";
   }
 });
+
+console.log("tytuł", title);
+console.log("http", http);
+console.log("photo:", photo);
 
 chrome.storage.sync.set({'title': title, 'http': http, 'photo': photo}, function() {
     console.log('Settings saved');
