@@ -1,16 +1,14 @@
 let title = document.querySelector("h1").innerHTML;
 let http = document.URL;
 let queryPhoto = document.querySelectorAll('img');
-let photo = null;
+let photo = "";
 
 queryPhoto.forEach(queryPhoto => {
-  if(queryPhoto.alt === title){
+  if(queryPhoto.alt == title){
     console.log(queryPhoto.alt);
     console.log(title);
     photo = queryPhoto.currentSrc;
     console.log("photo", photo);
-  }else{
-    photo="no photo";
   }
 });
 
