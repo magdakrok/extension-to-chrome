@@ -23,7 +23,7 @@ chrome.storage.sync.set({'title': title, 'http': http, 'photo': photo}, function
 })
 
 chrome.runtime.sendMessage({command: "save"}, (response) => {
-    console.log("save");
+    console.log("save: " +title );
   });
 
 

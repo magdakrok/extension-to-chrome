@@ -13,7 +13,7 @@ function addCake(items) {
     let id=randomID();
 
     return new Promise ((resolve, reject) => {
-        firebase.database().ref('/cake/'+id).set({
+        firebase.database().ref(`/cake/`).push({
             title: items.title,
             http: items.http,
             photo: items.photo
@@ -27,10 +27,10 @@ function addCake(items) {
   }
 
   function addOther(items) {
-    let id=randomID();
+  //  let id=randomID();
 
     return new Promise ((resolve, reject) => {
-        firebase.database().ref('/cooking'+id).set({
+        firebase.database().ref('/cooking/').push({
             title: items.title,
             http: items.http,
             photo: items.photo
