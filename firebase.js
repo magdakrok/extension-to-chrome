@@ -16,7 +16,8 @@ function addCake(items) {
         firebase.database().ref(`/cake/`).push({
             title: items.title,
             http: items.http,
-            photo: items.photo
+            photo: items.photo,
+            favorite: false
 
           }).then(res => resolve(res))
           .catch(error => {
@@ -33,7 +34,8 @@ function addCake(items) {
         firebase.database().ref('/cooking/').push({
             title: items.title,
             http: items.http,
-            photo: items.photo
+            photo: items.photo,
+            favorite: false
           }).then(res => resolve(res))
           .catch(error => {
               console.log(error);
