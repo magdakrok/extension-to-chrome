@@ -17,7 +17,8 @@ function addCake(items) {
             title: items.title,
             http: items.http,
             photo: items.photo,
-            favorite: false
+            favorite: false,
+            notes: ""
 
           }).then(res => resolve(res))
           .catch(error => {
@@ -35,7 +36,8 @@ function addCake(items) {
             title: items.title,
             http: items.http,
             photo: items.photo,
-            favorite: false
+            favorite: false,
+            notes: ""
           }).then(res => resolve(res))
           .catch(error => {
               console.log(error);
