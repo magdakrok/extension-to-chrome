@@ -9,11 +9,11 @@ var config = {
 firebase.initializeApp(config);
 
 
-function addCake(items) {
+function addCake(items, type) {
     let id=randomID();
 
     return new Promise ((resolve, reject) => {
-        firebase.database().ref(`/cake/`).push({
+        firebase.database().ref(`/${type}/`).push({
             title: items.title,
             http: items.http,
             photo: items.photo,
@@ -66,19 +66,24 @@ function onRemoved() {
   
 chrome.runtime.onMessage.addListener(function (msg){
 
+      let type = msg.command;
+      console.log(`TYPE ${type}`);
        
             if(msg.command == "cake"){
                 
                 chrome.storage.sync.get(['title', 'http', 'photo'], function(items) {
                     console.log('Settings retrieved', items);
                    
-                  addCake(items)
-                  .then(process => alert("Przepis dodano!"))
+                  addCake(items, type)
+                  .then(process => {alert("Przepis dodano!");
+                  chrome.storage.sync.remove(["title", "http", "photo"], onRemoved)
+                })
+
                   .catch(err => {alert("Error!"), console.log(err)});
                 });
                 // setTimeout(
                 //     () => 
-                    chrome.storage.sync.remove(["title", "http", "photo"], onRemoved)
+                   
                     // , 500);
 
 
