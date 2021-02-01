@@ -17,14 +17,14 @@ document.addEventListener('DOMContentLoaded', function () {
  
     function onclickCooking(){
         goToScript();
-        chrome.runtime.sendMessage({command: "salad", data: cook}, (response) => {
+        chrome.runtime.sendMessage({command: "salad", data: salad}, (response) => {
           
     });
 }
 
     function onclickCooking(){
         goToScript();
-        chrome.runtime.sendMessage({command: "dinner", data: cook}, (response) => {
+        chrome.runtime.sendMessage({command: "dinner", data: dinner}, (response) => {
           
     });
 }

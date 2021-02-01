@@ -10,7 +10,7 @@ firebase.initializeApp(config);
 
 
 function addCake(items, type) {
-    let id=randomID();
+    // let id=randomID();
 
     return new Promise ((resolve, reject) => {
         firebase.database().ref(`/${type}/`).push({
@@ -28,31 +28,31 @@ function addCake(items, type) {
     })
   }
 
-  function addOther(items) {
-  //  let id=randomID();
+  // function addOther(items) {
+  // //  let id=randomID();
 
-    return new Promise ((resolve, reject) => {
-        firebase.database().ref('/cooking/').push({
-            title: items.title,
-            http: items.http,
-            photo: items.photo,
-            favorite: false,
-            notes: ""
-          }).then(res => resolve(res))
-          .catch(error => {
-              console.log(error);
-              reject(error);
+  //   return new Promise ((resolve, reject) => {
+  //       firebase.database().ref('/cooking/').push({
+  //           title: items.title,
+  //           http: items.http,
+  //           photo: items.photo,
+  //           favorite: false,
+  //           notes: ""
+  //         }).then(res => resolve(res))
+  //         .catch(error => {
+  //             console.log(error);
+  //             reject(error);
 
-          })
-    })
-}
+  //         })
+  //   })
+// }
 
  
-function randomID(){
-    let array = new Uint32Array(1);
-    let id= window.crypto.getRandomValues(array);
-    return id;
-}
+// function randomID(){
+//     let array = new Uint32Array(1);
+//     let id= window.crypto.getRandomValues(array);
+//     return id;
+// }
 
 // callback to remove() just checks for errors
 function onRemoved() {
@@ -69,7 +69,7 @@ chrome.runtime.onMessage.addListener(function (msg){
       let type = msg.command;
       console.log(`TYPE ${type}`);
        
-            // if(msg.command == "cake"){
+            if((msg.command === "cake") || (msg.command === "salad") || (msg.command === "dinner")){
                 
                 chrome.storage.sync.get(['title', 'http', 'photo'], function(items) {
                     console.log('Settings retrieved', items);
@@ -97,9 +97,9 @@ chrome.runtime.onMessage.addListener(function (msg){
       //           });
       //           setTimeout(
       //               () => chrome.storage.sync.remove(["title", "http", "photo"], onRemoved), 500);
-      //           }
+                }
         
-      //  return true;
+       return true;
 });
 
 
