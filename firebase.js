@@ -76,8 +76,10 @@ chrome.runtime.onMessage.addListener(function (msg){
                   .then(process => alert("Przepis dodano!"))
                   .catch(err => {alert("Error!"), console.log(err)});
                 });
-                setTimeout(
-                    () => chrome.storage.sync.remove(["title", "http", "photo"], onRemoved), 5000);
+                // setTimeout(
+                //     () => 
+                    chrome.storage.sync.remove(["title", "http", "photo"], onRemoved)
+                    // , 500);
 
 
             }else if(msg.command == "cooking"){
@@ -89,7 +91,7 @@ chrome.runtime.onMessage.addListener(function (msg){
                   .catch(err => {alert("Error!"), console.log(err)});
                 });
                 setTimeout(
-                    () => chrome.storage.sync.remove(["title", "http", "photo"], onRemoved), 5000);
+                    () => chrome.storage.sync.remove(["title", "http", "photo"], onRemoved), 500);
                 }
         
        return true;

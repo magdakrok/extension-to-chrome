@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function onclickCake(){
         goToScript();
         chrome.runtime.sendMessage({command: "cake", data: cake}, (response) => {
+           
         });
        
     }
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function onclickCooking(){
         goToScript();
         chrome.runtime.sendMessage({command: "cooking", data: cook}, (response) => {
+          
     });
 }
 
