@@ -69,7 +69,7 @@ chrome.runtime.onMessage.addListener(function (msg){
       let type = msg.command;
       console.log(`TYPE ${type}`);
        
-            if(msg.command == "cake"){
+            // if(msg.command == "cake"){
                 
                 chrome.storage.sync.get(['title', 'http', 'photo'], function(items) {
                     console.log('Settings retrieved', items);
@@ -87,19 +87,19 @@ chrome.runtime.onMessage.addListener(function (msg){
                     // , 500);
 
 
-            }else if(msg.command == "cooking"){
+            // }else if(msg.command == "cooking"){
                
-                chrome.storage.sync.get(['title', 'http', 'photo'], function(items) {
-                    console.log('Settings retrieved', items);
-                    addOther(items)
-                  .then(process => alert("Przepis dodano!"))
-                  .catch(err => {alert("Error!"), console.log(err)});
-                });
-                setTimeout(
-                    () => chrome.storage.sync.remove(["title", "http", "photo"], onRemoved), 500);
-                }
+      //           chrome.storage.sync.get(['title', 'http', 'photo'], function(items) {
+      //               console.log('Settings retrieved', items);
+      //               addOther(items)
+      //             .then(process => alert("Przepis dodano!"))
+      //             .catch(err => {alert("Error!"), console.log(err)});
+      //           });
+      //           setTimeout(
+      //               () => chrome.storage.sync.remove(["title", "http", "photo"], onRemoved), 500);
+      //           }
         
-       return true;
+      //  return true;
 });
 
 
